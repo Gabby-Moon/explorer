@@ -33,8 +33,21 @@ public class ExplorerSearch {
         // Please also make more test cases
         // I STRONGLY RECOMMEND testing some helpers you might make too
         int[] start = startingLocation(island);
+        boolean[][] visited = new boolean[island.length][island[0].length];
         return -1;
     }
+    // public static int reachableArea(int[][] island, int[] current, boolean[][] visited) {
+    //     int currR = current[0];
+    //     int currC = current[1];
+
+    //     if(visited[currR][currC]) return 0;
+
+    //     visited[currR][currC] = true;
+    //     List<int[]> moves = possibleMoves(island, current);
+    //     for(int[] move : moves) {
+
+    //     }
+    // }
 
     public static int[] startingLocation(int[][] island) {
         for(int r = 0; r < island.length; r++) {
@@ -49,4 +62,40 @@ public class ExplorerSearch {
         throw new IllegalArgumentException("No start present");
     }
 
+    public static List<int[]> possibleMoves(int[][] island, int[] current) {
+        List<int[]> moves = new ArrayList<>();
+
+        int currR = current[0];
+        int currC = current[1];
+
+        // Up
+        int newR = currR - 1;
+        int newC = currC;
+        if(newR >= 0 && (island[newR][newC] != 2 && island[newR][newC] != 3)) {
+            moves.add(new int[]{newR, newC});
+        }
+
+        // Down
+        newR = currR + 1;
+        newC = currC;
+        if(newR < island.length && (island[newR][newC] != 2 && island[newR][newC] != 3)) {
+            moves.add(new int[]{newR, newC});
+        }
+
+        // Left
+        newR = currR;
+        newC = currC - 1;
+        if(newC >= 0 && (island[newR][newC] != 2 && island[newR][newC] != 3)) {
+            moves.add(new int[]{newR, newC});
+        }
+
+        // Right
+        newR = currR;
+        newC = currC + 1;
+        if(newC < island[newR].length && (island[newR][newC] != 2 && island[newR][newC] != 3)) {
+            moves.add(new int[]{newR, newC});
+        }
+
+        return moves;
+    }
 }
