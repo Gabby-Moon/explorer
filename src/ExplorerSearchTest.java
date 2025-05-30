@@ -274,10 +274,44 @@ public class ExplorerSearchTest {
         assertTrue(moveSet.isEmpty());
     }
 
+    @Test
+    public void testPossibleMoves_onlyStart() {
+        int[][] island = {
+            {0}
+        };
+        int[] location = {0,0};
+        List<int[]> moves = ExplorerSearch.possibleMoves(island, location);
+        Set<String> moveSet = toSet(moves);
+
+        assertTrue(moveSet.isEmpty());
+    }
+
     // --------------------------------------
-    //        Test ()
+    //        More Test reachableArea()
     // --------------------------------------
 
+    @Test
+    public void testReachableArea_allReachable() {
+        int[][] island = {
+            {1,1,0,1},
+            {1,1,1,1},
+            {1,1,1,1}
+        };
+        int actual = ExplorerSearch.reachableArea(island);
+        assertEquals(12, actual);
+    }
+
+    @Test
+    public void testReachableArea_onlyStart() {
+        int[][] island = {
+            {3,1,3,2},
+            {2,2,2,2},
+            {2,2,0,2},
+            {1,2,2,2}
+        };
+        int actual = ExplorerSearch.reachableArea(island);
+        assertEquals(1, actual);
+    }
 
 
     // -----------------------------
